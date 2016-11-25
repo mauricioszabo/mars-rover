@@ -30,11 +30,10 @@
       rover)))
 
 (defn process-movements [rover field-size movements]
-  (let [movements (re-seq #"." movements)
-        positions (reductions #(check-pos field-size (move %1 %2)) rover movements)
-        [success failure] (split-with #(-> % first (not= :error)) positions)
+  (let [[success failure] (->> movements
+                               (re-seq #".")
+                               (reductions #(check-pos field-size (move %1 %2)) rover)
+                               (split-with #(-> % first (not= :error))))
         last-rover-pos (last success)
         failure (first failure)]
-    (if failure
-      (conj failure last-rover-pos)
-      last-rover-pos)))
+    (if failure (conj failure last-rover-pos) last-rover-pos)))

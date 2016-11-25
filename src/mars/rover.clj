@@ -2,8 +2,8 @@
 
 (defn- forward [rover]
   (case (last rover)
-    :n (update rover 1 dec)
-    :s (update rover 1 inc)
+    :s (update rover 1 dec)
+    :n (update rover 1 inc)
     :w (update rover 0 dec)
     :e (update rover 0 inc)))
 
@@ -21,3 +21,17 @@
     "L" (rotate rover :l)
     "R" (rotate rover :r)
     [:error :invalid-command cmd]))
+
+(defn- check-pos [[height width] [left bottom]]
+  (if (or (neg? left) (neg? bottom)
+          (> left height) (> bottom width))
+    [:error :out-of-field]))
+
+(defn process-movements [rover field-size movements]
+  (let [movements (re-seq #"." movements)
+        positions (reductions #(check-pos field-size (move %1 %2)) rover movements)
+        [success failure] (split-with #(-> % first (not= :error)) positions)
+        last-rover-pos (last success)
+        failure (first failure)]
+    (if failure
+      (conj failure last-rover-pos))))

@@ -7,8 +7,8 @@
     :w (update rover 0 dec)
     :e (update rover 0 inc)))
 
-(def lefts {:n :w, :w :s, :s :e, :e :n})
-(def rights (->> lefts (map (comp vec reverse)) (into {})))
+(def ^:private lefts {:n :w, :w :s, :s :e, :e :n})
+(def ^:private rights (->> lefts (map (comp vec reverse)) (into {})))
 (defn- rotate [rover pos]
   (update rover 2
           #(if (= pos :l)

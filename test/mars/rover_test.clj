@@ -7,7 +7,11 @@
     (is (= [10 11 :n] (rover/move [10 10 :n] "M")))
     (is (= [10 9 :s] (rover/move [10 10 :s] "M")))
     (is (= [11 10 :e] (rover/move [10 10 :e] "M")))
-    (is (= [9 10 :w] (rover/move [10 10 :w] "M")))))
+    (is (= [9 10 :w] (rover/move [10 10 :w] "M"))))
+
+  (testing "multiple movements"
+    (is (= [10 0 :e] (rover/process-movements [0 0 :e] [20 20] "MMMMMMMMMM")))
+    (is (= [5 5 :n] (rover/process-movements [0 0 :e] [20 20] "MMMMMLMMMMM")))))
 
 (deftest rotation
   (testing "rover rotates"

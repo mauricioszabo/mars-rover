@@ -22,10 +22,12 @@
     "R" (rotate rover :r)
     [:error :invalid-command cmd]))
 
-(defn- check-pos [[height width] [left bottom]]
-  (if (or (neg? left) (neg? bottom)
-          (> left height) (> bottom width))
-    [:error :out-of-field]))
+(defn- check-pos [[height width] rover]
+  (let [[left bottom] rover]
+    (if (or (neg? left) (neg? bottom)
+            (> left height) (> bottom width))
+      [:error :out-of-field]
+      rover)))
 
 (defn process-movements [rover field-size movements]
   (let [movements (re-seq #"." movements)
@@ -34,4 +36,5 @@
         last-rover-pos (last success)
         failure (first failure)]
     (if failure
-      (conj failure last-rover-pos))))
+      (conj failure last-rover-pos)
+      last-rover-pos)))

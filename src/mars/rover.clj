@@ -19,4 +19,5 @@
   (case cmd
     "M" (forward rover)
     "L" (rotate rover :l)
-    "R" (rotate rover :r)))
+    "R" (rotate rover :r)
+    [:error :invalid-command cmd]))

@@ -14,5 +14,6 @@
 
   :source-paths ["src"]
 
-  :profiles {:dev {:source-paths ["dev"]}}
+  :profiles {:dev {:source-paths ["dev"]
+                   :dependencies [[ring/ring-mock "0.3.0"]]}}
   :main mars.handler)

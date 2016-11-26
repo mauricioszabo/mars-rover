@@ -9,13 +9,11 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [compojure "1.5.1"]
                  [ring/ring-defaults "0.2.1"]
-                 [ring/ring-jetty-adapter "1.2.1"]]
+                 [ring/ring-jetty-adapter "1.2.1"]
+                 [instaparse "1.4.3"]]
 
   :source-paths ["src"]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 
-  :profiles {:dev {:source-paths ["dev"]
-                   :dependencies [[binaryage/devtools "0.8.2"]
-                                  [figwheel-sidecar "0.5.8"]
-                                  [com.cemerick/piggieback "0.2.1"]]}})
+  :profiles {:dev {:source-paths ["dev"]}})

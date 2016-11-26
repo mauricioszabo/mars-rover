@@ -14,6 +14,6 @@
 
   :source-paths ["src"]
 
-  :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
-
-  :profiles {:dev {:source-paths ["dev"]}})
+  :profiles {:dev {:source-paths ["dev"]
+                   :dependencies [[ring/ring-mock "0.3.0"]]}}
+  :main mars.handler)

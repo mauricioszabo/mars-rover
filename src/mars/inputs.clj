@@ -26,3 +26,11 @@
     (if (insta/failure? parsed)
       :invalid-format
       (move-rovers (drop 1 parsed)))))
+
+(defn- rover->str [rover]
+  (let [internal->str #(cond-> %
+                               (keyword? %) (-> name str/upper-case))]
+    (->> rover (map internal->str) (str/join " "))))
+
+(defn generate-output [rovers]
+  (->> rovers (map rover->str) (str/join "\n")))

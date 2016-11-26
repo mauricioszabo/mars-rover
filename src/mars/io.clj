@@ -4,11 +4,12 @@
             [instaparse.core :as insta]))
 
 (def ^:private grammar (insta/parser "
-  start := board rover*
-  board := #'\\d+' <' '> #'\\d+'
-  rover := <'\\n'> initial <'\\n'> movements
+  start := board rover*  <('\\n' trailing-space)?>
+  board := #'\\d+' <' '> #'\\d+' <trailing-space>
+  rover := <'\\n'> initial <trailing-space> <'\\n'> movements <trailing-space>
   initial := #'\\d+' <' '> #'\\d+' <' '> #'[EWNS]'
   movements := #'[LRM]+'
+  trailing-space := #' *'
 "))
 
 (def ^:private rewrite-rules

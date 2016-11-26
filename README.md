@@ -9,9 +9,9 @@ This rover simulation is implemented based on rules from: https://gist.github.co
 Changes from implementation: in case of parse error or other problems
 (like, rover is out of field or parse error), the following rules would be implemented:
 
-* If there's a parse error - three coordinates for start, or additional spaces before
-or after each coordinate, or invalid characters in rover's movement: nothing will
-be simulated, and we'll just return the string `INVALID-FORMAT`á
+* If there's a parse error - three coordinates for start, or invalid characters
+in rover's movement: nothing will be simulated, and we'll just return the
+string `INVALID-FORMAT`
 * If it's possible to parse commands, but after obeying one command rover would be
 in an invalid position - out of bounds - we'll return `ERROR OUT-OF-FIELD `, followed
 by the last valid position of rover before it reached an invalid coordinate.

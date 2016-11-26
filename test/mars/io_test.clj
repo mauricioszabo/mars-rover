@@ -5,8 +5,9 @@
 (deftest parsing-data
   (testing "gets data to one rover"
     (is (= [[1 5 :n]] (io/parse "5 5\n1 2 N\nMMM")))
-    (is (= [[:error :out-of-field [1 5 :n]]] (io/parse "5 5\n1 2 N\nMMMM")))
-    (is (= [[:error :out-of-field [1 0 :s]]] (io/parse "5 5\n1 2 N\nRRMMM"))))
+    (is (= [[1 5 :n]] (io/parse "5 5 \n1 2 N \nMMM \n")))
+    (is (= [[:error :out-of-field 1 5 :n]] (io/parse "5 5\n1 2 N\nMMMM")))
+    (is (= [[:error :out-of-field 1 0 :s]] (io/parse "5 5\n1 2 N\nRRMMM"))))
 
   (testing "gets data to multiple rovers"
     (is (= [[1 5 :n] [2 4 :w]] (io/parse "5 5\n1 2 N\nMMM\n1 3 E\nMLML"))))

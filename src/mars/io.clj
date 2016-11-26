@@ -24,7 +24,7 @@
 (defn parse [inputs]
   (let [parsed (->> inputs grammar (insta/transform rewrite-rules))]
     (if (insta/failure? parsed)
-      :invalid-format
+      [[:invalid-format]]
       (move-rovers (drop 1 parsed)))))
 
 (defn- rover->str [rover]

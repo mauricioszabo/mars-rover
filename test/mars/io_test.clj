@@ -12,7 +12,7 @@
     (is (= [[1 5 :n] [2 4 :w]] (io/parse "5 5\n1 2 N\nMMM\n1 3 E\nMLML"))))
 
   (testing "checking for parse error"
-    (is (= :invalid-format (io/parse "5 5 5")))))
+    (is (= [[:invalid-format]] (io/parse "5 5 5")))))
 
 (deftest output-generator
   (testing "generating output"

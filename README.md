@@ -1,39 +1,73 @@
-# mars
+# MARS
 
-FIXME: Write a one-line description of your library/project.
+Rover simulation application in Clojure.
 
 ## Overview
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+This rover simulation is implemented based on rules from: https://gist.github.com/nirev/c42c35eb9a839f7756558519f361bc06
+
+Changes from implementation: in case of parse error or other problems
+(like, rover is out of field or parse error), the following rules would be implemented:
+
+* If there's a parse error - three coordinates for start, or additional spaces before
+or after each coordinate, or invalid characters in rover's movement: nothing will
+be simulated, and we'll just return the string `INVALID-FORMAT`á
+* If it's possible to parse commands, but after obeying one command rover would be
+in an invalid position - out of bounds - we'll return `ERROR OUT-OF-FIELD `, followed
+by the last valid position of rover before it reached an invalid coordinate.
 
 ## Setup
 
-To get an interactive development environment run:
+To get a webserver, run:
 
-    lein figwheel
+    lein run
 
-and open your browser at [localhost:3449](http://localhost:3449/).
-This will auto compile and send all changes to the browser without the
-need to reload. After the compilation process is complete, you will
-get a Browser Connected REPL. An easy way to try it is:
+Then, pass commands using PUT in "localhost:3001/mars". You can use curl:
 
-    (js/alert "Am I connected?")
+    curl localhost:3001/move -XPUT -d "5 5
+    1 2 N
+    LMLMLMLMM
+    3 3 E
+    MMRMMRMRRM"
 
-and you should see an alert in the browser window.
+## Some examples
 
-To clean all compiled files:
+This code is deployed on heroku, at https://rock-and-rover.herokuapp.com/. We'll use
+`curl` and try to send coordinates to one or more rovers:
 
-    lein clean
+```sh
+# case 1 - everything is correct
+curl https://rock-and-rover.herokuapp.com/move -XPUT -d "5 5
+1 2 N
+LMLMLMLMM
+3 3 E
+MMRMMRMRRM"
+# returns
+1 3 N
+5 1 E
 
-To create a production build run:
+# case 2 - parse error (movement of rover 2 includes A
+curl https://rock-and-rover.herokuapp.com/move -XPUT -d "5 5
+1 2 N
+LMLMLMLMM
+3 3 E
+MMRMMRMRRMA"
+# returns
+INVALID-FORMAT
 
-    lein do clean, cljsbuild once min
-
-And open your browser in `resources/public/index.html`. You will not
-get live reloading, nor a REPL. 
+# case 3 - rover is out of field
+$ curl https://rock-and-rover.herokuapp.com/move -XPUT -d "5 5
+1 2 N
+LMLMLMLMM
+3 3 E
+MMRMMRMRRMMMMMMMMM"
+# returns
+1 3 N
+ERROR OUT-OF-FIELD 5 1 E
+```
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright Maurício Szabo © 2016
 
-Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+Distributed under the Creative Commons Non-comercial Non-derivatives license.

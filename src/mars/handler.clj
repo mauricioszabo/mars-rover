@@ -1,5 +1,6 @@
 (ns mars.handler
-  (:require [compojure.core :refer :all]
+  (:require [mars.io :as io]
+            [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [ring.adapter.jetty :as jetty]))
@@ -7,7 +8,7 @@
 (defroutes app-routes
   (PUT "/move" {:keys [body]}
     (let [body (slurp body)]
-      body))
+      (-> body io/parse io/generate-output)))
 
   (route/not-found "Not Found"))
 

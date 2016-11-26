@@ -12,3 +12,9 @@
 
   (testing "checking for parse error"
     (is (= :invalid-format (inputs/parse "5 5 5")))))
+
+(deftest output-generator
+  (testing "generating output"
+    (is (= "1 5 N\n3 3 S" (inputs/generate-output [[1 5 :n] [3 3 :s]])))
+    (is (= "ERROR OUT-OF-FIELD 1 5 N\n3 3 S"
+           (inputs/generate-output [[:error :out-of-field 1 5 :n] [3 3 :s]])))))

@@ -3,7 +3,8 @@
             [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
-            [ring.adapter.jetty :as jetty]))
+            [ring.adapter.jetty :as jetty])
+  (:gen-class))
 
 (defroutes app-routes
   (PUT "/move" {:keys [body]}

@@ -13,7 +13,9 @@
                  [instaparse "1.4.3"]]
 
   :source-paths ["src"]
+  :uberjar-name "mars-standalone.jar"
 
   :profiles {:dev {:source-paths ["dev"]
-                   :dependencies [[ring/ring-mock "0.3.0"]]}}
+                   :dependencies [[ring/ring-mock "0.3.0"]]}
+             :uberjar {:aot :all}}
   :main mars.handler)

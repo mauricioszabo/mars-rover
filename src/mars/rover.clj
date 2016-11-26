@@ -19,8 +19,7 @@
   (case cmd
     "M" (forward rover)
     "L" (rotate rover :l)
-    "R" (rotate rover :r)
-    [:error :invalid-command cmd]))
+    "R" (rotate rover :r)))
 
 (defn- check-pos [[height width] rover]
   (let [[left bottom] rover]

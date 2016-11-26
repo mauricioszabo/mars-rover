@@ -19,9 +19,6 @@
     (is (= [10 10 :e] (rover/move [10 10 :n] "R")))))
 
 (deftest error-cases
-  (testing "invalid command"
-    (is (= [:error :invalid-command "S"] (rover/move [10 10 :n] "S"))))
-
   (testing "checks if rover is out of field"
     (is (= [:error :out-of-field 0 0 :s]
            (rover/process-movements [0 0 :s] [10 10] "M")))

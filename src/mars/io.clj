@@ -1,4 +1,4 @@
-(ns mars.inputs
+(ns mars.io
   (:require [clojure.string :as str]
             [mars.rover :as rover]
             [instaparse.core :as insta]))

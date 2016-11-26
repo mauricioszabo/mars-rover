@@ -70,4 +70,4 @@ ERROR OUT-OF-FIELD 5 1 E
 
 Copyright Maurício Szabo © 2016
 
-Distributed under the Creative Commons Non-comercial Non-derivatives license.
+Distributed under the Creative Commons attibution non-commercial non-derivatives license.

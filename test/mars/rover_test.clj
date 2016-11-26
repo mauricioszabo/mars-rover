@@ -23,7 +23,7 @@
     (is (= [:error :invalid-command "S"] (rover/move [10 10 :n] "S"))))
 
   (testing "checks if rover is out of field"
-    (is (= [:error :out-of-field [0 0 :s]]
+    (is (= [:error :out-of-field 0 0 :s]
            (rover/process-movements [0 0 :s] [10 10] "M")))
-    (is (= [:error :out-of-field [0 10 :n]]
+    (is (= [:error :out-of-field 0 10 :n]
            (rover/process-movements [0 10 :n] [10 10] "M")))))

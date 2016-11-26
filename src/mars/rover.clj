@@ -34,6 +34,5 @@
                                (re-seq #".")
                                (reductions #(check-pos field-size (move %1 %2)) rover)
                                (split-with #(-> % first (not= :error))))
-        last-rover-pos (last success)
-        failure (first failure)]
-    (if failure (conj failure last-rover-pos) last-rover-pos)))
+        last-rover-pos (last success)]
+    (concat (first failure) last-rover-pos)))
